@@ -1,0 +1,21 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:8.0.17
+    restart: always
+    ports:
+    - "3306:3306"
+    env_file: .env
+    volumes:
+      - ./dbdata:/var/lib/mysql
+      - ./mysql_conf/my.cnf:/etc/mysql/my.cnf
+      - ./mysql_conf/conf.d:/etc/mysql/conf.d
+        #  - ./sqlmnt:/docker-entrypoint-initdb.d
+    user: 65084d55269b3a516fd6fc7b8b3cd4ce7efc1d6d5355cf8e7f7706ee210b788a
+  adminer:
+    image: adminer:4.7.2
+    restart: always
+    depends_on:
+        - mysql
+    ports:
+    - "8888:8080"
