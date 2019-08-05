@@ -9,6 +9,8 @@ services:
     - ./dbdata:/var/lib/mysql
     - ./mysql_conf/my.cnf:/etc/mysql/my.cnf
     #  - ./sqlmnt:/docker-entrypoint-initdb.d
+    networks:
+      - web
 
   adminer:
     image: adminer:4.7.2
@@ -17,7 +19,8 @@ services:
         - mysql
     ports:
     - "8888:8080"
-
+    networks:
+      - web
   nginx:
     image: nginx: 
 nginx:
@@ -29,3 +32,8 @@ nginx:
   ports:
   - "80:80"
   - "443:443" 
+  networks:
+    - web
+
+networks:
+  web:
