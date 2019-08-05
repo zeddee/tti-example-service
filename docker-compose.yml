@@ -4,9 +4,6 @@ services:
     image: mysql:8.0.17
     restart: always
     command: --default-authentication-plugin=mysql_native_password
-    user: "1000:1000"
-    ports:
-    - "33060:33060"
     env_file: .env
     volumes:
     - ./dbdata:/var/lib/mysql
